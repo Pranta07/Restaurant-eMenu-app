@@ -69,6 +69,7 @@ export default function Home() {
         <View style={styles.container}>
             <Text style={styles.resName}>Hungry Chef!</Text>
             <Searchbar
+                style={styles.searchBar}
                 placeholder="Search"
                 onChangeText={onChangeSearch}
                 value={searchQuery}
@@ -103,5 +104,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+    },
+    searchBar: {
+        margin: 10,
     },
 });
