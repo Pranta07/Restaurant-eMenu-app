@@ -31,7 +31,7 @@ const Navigation = () => {
         /> */
         <Appbar style={styles.bottom}>
             <Link to="/menu">
-                <Appbar.Action icon="menu" />
+                <Appbar.Action icon="food" />
             </Link>
             <Link to="/">
                 <Appbar.Action icon="home" />
@@ -59,5 +59,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
+        height: 60,
+        paddingTop: 10,
     },
 });
