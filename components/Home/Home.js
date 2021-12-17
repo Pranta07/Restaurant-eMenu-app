@@ -12,9 +12,9 @@ export default function Home() {
         >
             <View style={styles.home}>
                 <Text
-                    style={{ color: "white", fontSize: 24, fontWeight: "bold" }}
+                    style={{ color: "white", fontSize: 40, fontWeight: "bold" }}
                 >
-                    This is Home!
+                    Chef Club
                 </Text>
             </View>
         </ImageBackground>
@@ -23,8 +23,9 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     home: {
-        flex: 1,
-        justifyContent: "center",
+        // flex: 1,
+        // justifyContent: "center",
         alignItems: "center",
+        top: 80,
     },
 });

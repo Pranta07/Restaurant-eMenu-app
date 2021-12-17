@@ -55,6 +55,7 @@ export default Navigation;
 const styles = StyleSheet.create({
     bottom: {
         // position: "absolute",
+        backgroundColor: "white",
         left: 0,
         right: 0,
         bottom: 0,

@@ -8,12 +8,14 @@ import {
     ActivityIndicator,
     Colors,
 } from "react-native-paper";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 export default function ItemDetails() {
     const [item, setItem] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const { id } = useParams();
+    const vid = item?.strYoutube?.split("=")[1];
 
     useEffect(() => {
         const getItem = async () => {
@@ -51,9 +53,10 @@ export default function ItemDetails() {
                     <Button onPress={() => {}}>Order</Button>
                 </Card.Actions>
             </Card>
-            <Card style={styles.card}>
-                <Card.Content></Card.Content>
-            </Card>
+            <View style={{ margin: 10 }}>
+                <Text>Recipe Video</Text>
+                <YoutubePlayer height={300} videoId={vid} />
+            </View>
         </ScrollView>
     );
 }
