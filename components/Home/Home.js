@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 
 export default function Home() {
     return (
@@ -11,6 +11,12 @@ export default function Home() {
             style={{ width: "100%", height: "100%" }}
         >
             <View style={styles.home}>
+                <Image
+                    source={{
+                        uri: "https://image.similarpng.com/very-thumbnail/2021/06/Chef-logo-template-isoated-on-transparent-background-PNG.png",
+                    }}
+                    style={{ width: 100, height: 80 }}
+                />
                 <Text
                     style={{ color: "white", fontSize: 40, fontWeight: "bold" }}
                 >
@@ -23,8 +29,6 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     home: {
-        // flex: 1,
-        // justifyContent: "center",
         alignItems: "center",
         top: 80,
     },
