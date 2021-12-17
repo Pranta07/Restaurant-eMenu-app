@@ -1,111 +1,30 @@
-import React, { useRef, useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import {
-    Searchbar,
-    Card,
-    Avatar,
-    IconButton,
-    ActivityIndicator,
-    Colors,
-    Title,
-} from "react-native-paper";
+import React from "react";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 
 export default function Home() {
-    const [searchQuery, setSearchQuery] = React.useState("");
-
-    const onChangeSearch = (query) => setSearchQuery(query);
-
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
-    // const itemsRef = useRef([]);
-
-    useEffect(() => {
-        const getItems = async () => {
-            const response = await fetch(
-                `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`
-            );
-            const data = await response.json();
-
-            // itemsRef.current = items;
-            setItems(data.meals);
-            setLoading(false);
-        };
-
-        getItems();
-    }, [searchQuery]);
-
-    const renderItem = ({ item }) => {
-        return (
-            <View style={styles.item}>
-                <Card.Title
-                    title={item.strMeal}
-                    subtitle="Price: 250"
-                    left={(props) => (
-                        <Avatar.Image
-                            {...props}
-                            size={40}
-                            source={{
-                                uri: item.strMealThumb,
-                            }}
-                        />
-                    )}
-                    right={(props) => (
-                        <IconButton {...props} icon="plus" onPress={() => {}} />
-                    )}
-                />
-            </View>
-        );
-    };
-
-    if (loading) {
-        return (
-            <View style={styles.loading}>
-                <ActivityIndicator animating={true} color={Colors.blue800} />
-            </View>
-        );
-    }
-
     return (
-        <View style={styles.container}>
-            <Text style={styles.resName}>Hungry Chef!</Text>
-            <Searchbar
-                style={styles.searchBar}
-                placeholder="Search"
-                onChangeText={onChangeSearch}
-                value={searchQuery}
-            />
-            <Title>Menu Items</Title>
-            <FlatList
-                data={items}
-                keyExtractor={(item) => item.idMeal}
-                renderItem={renderItem}
-                numColumns={1}
-            />
-        </View>
+        <ImageBackground
+            source={{
+                uri: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZHxlbnwwfDF8MHx8&auto=format&fit=crop&w=500&q=60",
+            }}
+            resizeMode="cover"
+            style={{ width: "100%", height: "100%" }}
+        >
+            <View style={styles.home}>
+                <Text
+                    style={{ color: "white", fontSize: 24, fontWeight: "bold" }}
+                >
+                    This is Home!
+                </Text>
+            </View>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-    },
-    resName: {
-        fontSize: 20,
-        fontWeight: "bold",
-        marginTop: 25,
-        marginBottom: 10,
-        color: "blueviolet",
-    },
-    item: {
-        width: 350,
-    },
-    loading: {
+    home: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-    },
-    searchBar: {
-        margin: 10,
     },
 });
