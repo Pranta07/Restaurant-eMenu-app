@@ -30,6 +30,6 @@ export default function Home() {
 const styles = StyleSheet.create({
     home: {
         alignItems: "center",
-        top: 80,
+        top: 200,
     },
 });
