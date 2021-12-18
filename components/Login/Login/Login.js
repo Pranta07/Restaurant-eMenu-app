@@ -8,7 +8,7 @@ import {
     View,
     Text,
 } from "react-native";
-import { TextInput } from "react-native-paper";
+import { Avatar, TextInput } from "react-native-paper";
 
 const Login = () => {
     const [loginInfo, setLoginInfo] = useState({});
@@ -37,6 +37,9 @@ const Login = () => {
 
     return (
         <KeyboardAvoidingView style={styles.container}>
+            <View style={{ marginHorizontal: "auto", marginVertical: 15 }}>
+                <Avatar.Icon size={80} icon="account-circle" />
+            </View>
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder="Email"
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
         width: "60%",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 40,
+        marginTop: 30,
     },
     button: {
         backgroundColor: "#0782F9",
