@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useParams } from "react-router";
+import YoutubePlayer from "react-native-youtube-iframe";
 import {
     Button,
     Card,
@@ -8,7 +9,6 @@ import {
     ActivityIndicator,
     Colors,
 } from "react-native-paper";
-import YoutubePlayer from "react-native-youtube-iframe";
 
 export default function ItemDetails() {
     const [item, setItem] = useState([]);

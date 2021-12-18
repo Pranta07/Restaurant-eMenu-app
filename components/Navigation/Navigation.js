@@ -30,11 +30,11 @@ const Navigation = () => {
             shifting={true}
         /> */
         <Appbar style={styles.bottom}>
-            <Link to="/menu">
-                <Appbar.Action icon="food" />
-            </Link>
             <Link to="/">
                 <Appbar.Action icon="home" />
+            </Link>
+            <Link to="/menu">
+                <Appbar.Action icon="food" />
             </Link>
             <Link to="/orders">
                 <Appbar.Action icon="cart" />

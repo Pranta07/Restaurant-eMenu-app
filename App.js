@@ -18,6 +18,7 @@ export default function App() {
                     <Navigation></Navigation>
                     <Routes>
                         <Route index path="/" element={<Home />} />
+                        <Route path="/home" element={<Home />} />
                         <Route path="/menu" element={<Menu />} />
                         <Route path="/details/:id" element={<ItemDetails />} />
                         <Route path="/orders" element={<MyOrders />} />

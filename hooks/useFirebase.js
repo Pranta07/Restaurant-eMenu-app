@@ -33,7 +33,7 @@ const useFirebase = () => {
                 //saveUser(name, email); //save user info to db
                 // handleUpdate(name);
                 setError("");
-                navigate("/home");
+                navigate("/");
             })
             .catch((error) => {
                 setError(error.message);
@@ -50,7 +50,7 @@ const useFirebase = () => {
                 // Signed in
                 setError("");
                 alert("Login Success!");
-                navigate("/home");
+                navigate("/");
             })
             .catch((error) => {
                 setError(error.message);
