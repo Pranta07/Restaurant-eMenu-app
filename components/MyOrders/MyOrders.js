@@ -30,7 +30,7 @@ export default function MyOrders() {
     const getData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem("cart");
-            return (data = jsonValue ? JSON.parse(jsonValue) : {});
+            return jsonValue ? JSON.parse(jsonValue) : {};
             // console.log("getData", data);
         } catch (e) {
             // error reading value

@@ -7,7 +7,8 @@ import { Link } from "react-router-native";
 
 const Navigation = () => {
     const { user, handleSignOut } = useAuth();
-    const { cart } = useCart();
+    const { data } = useCart();
+    const da = Object.keys(data);
 
     return (
         <Appbar style={styles.bottom}>
@@ -26,7 +27,7 @@ const Navigation = () => {
                     }}
                 >
                     <Appbar.Action icon="cart" />
-                    <Text style={{ fontStyle: "italic" }}>{cart.length}</Text>
+                    <Text style={{ fontStyle: "italic" }}>{da.length}</Text>
                 </View>
             </Link>
             {user.email ? (
