@@ -4,32 +4,32 @@ import { Card, Avatar, IconButton, Badge } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OrderCard = ({ item }) => {
-    // const [text, setText] = useState(item.quantity);
+    const [quantity, setQuantitiy] = useState(item.quantity);
 
     const handlePlus = () => {
         item.quantity++;
-        // setText(item.quantity);
-        updateData(item.quantity);
+        setQuantitiy(item.quantity);
+        updateData();
     };
 
     const handleMinus = () => {
         if (item.quantity > 1) {
             item.quantity--;
-            // setText(item.quantity);
-            updateData(item.quantity);
+            setQuantitiy(item.quantity);
+            updateData();
         }
     };
 
-    const updateData = async (q) => {
+    const updateData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem("cart");
             const data = jsonValue ? JSON.parse(jsonValue) : {};
 
-            data[item.idMeal] = q;
+            data[item?.idMeal] = quantity;
 
             await AsyncStorage.setItem("cart", JSON.stringify(data));
         } catch (e) {
-            // console.log(e.message);
+            console.log(e.message);
         }
     };
 
@@ -63,7 +63,7 @@ const OrderCard = ({ item }) => {
                             marginHorizontal: 5,
                         }}
                     >
-                        {item.quantity}
+                        {quantity}
                     </Badge>
                     <IconButton icon="plus" size={20} onPress={handlePlus} />
                 </Card.Actions>
