@@ -2,13 +2,8 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useParams } from "react-router";
 import YoutubePlayer from "react-native-youtube-iframe";
-import {
-    Button,
-    Card,
-    Title,
-    ActivityIndicator,
-    Colors,
-} from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Button, Card, ActivityIndicator, Colors } from "react-native-paper";
 
 export default function ItemDetails() {
     const [item, setItem] = useState([]);
@@ -30,6 +25,37 @@ export default function ItemDetails() {
 
         getItem();
     }, [id]);
+
+    const storeData = async (id) => {
+        const data = await getData();
+        // console.log(data);
+        let newCart = {};
+        if (data) {
+            newCart = data;
+            if (newCart[id]) newCart[id]++;
+            else newCart[id] = 1;
+        } else {
+            newCart[id] = 1;
+        }
+        console.log(newCart);
+        try {
+            const jsonValue = JSON.stringify(newCart);
+            await AsyncStorage.setItem("cart", jsonValue);
+        } catch (e) {
+            // saving error
+        }
+    };
+
+    const getData = async () => {
+        // await AsyncStorage.clear();
+        try {
+            const jsonValue = await AsyncStorage.getItem("cart");
+            return jsonValue ? JSON.parse(jsonValue) : {};
+            // console.log(jsonValue);
+        } catch (e) {
+            // error reading value
+        }
+    };
 
     if (loading) {
         return (
@@ -59,7 +85,14 @@ export default function ItemDetails() {
                     <Text numberOfLines={5}>{item.strInstructions}</Text>
                 </Card.Content>
                 <Card.Actions>
-                    <Button onPress={() => {}}>Add To Cart</Button>
+                    <Button
+                        onPress={() => {
+                            alert("Item Added!");
+                            storeData(item.idMeal);
+                        }}
+                    >
+                        Add To Cart
+                    </Button>
                 </Card.Actions>
             </Card>
 
