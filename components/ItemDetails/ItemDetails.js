@@ -43,16 +43,26 @@ export default function ItemDetails() {
         <ScrollView>
             <Card style={styles.card}>
                 <Card.Cover source={{ uri: item.strMealThumb }} />
-                <Card.Title title={item.strMeal} subtitle={item.strCategory} />
+                <View style={{ flex: 1, flexDirection: "row" }}>
+                    <Card.Title
+                        style={{ flex: 1 }}
+                        title={item.strMeal}
+                        subtitle={item.strCategory}
+                    />
+                    <Card.Title
+                        style={{ flex: 1 }}
+                        title={`${item.strArea} Food`}
+                        subtitle={"199TK"}
+                    />
+                </View>
                 <Card.Content>
-                    <Title>{item.strArea} Food</Title>
-                    <Title>199TK</Title>
                     <Text numberOfLines={5}>{item.strInstructions}</Text>
                 </Card.Content>
                 <Card.Actions>
-                    <Button onPress={() => {}}>Order</Button>
+                    <Button onPress={() => {}}>Add To Cart</Button>
                 </Card.Actions>
             </Card>
+
             <View style={{ margin: 10 }}>
                 <Text>Recipe Video</Text>
                 <YoutubePlayer height={300} videoId={vid} />

@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Link } from "react-router-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
     Searchbar,
     Card,
@@ -14,12 +15,10 @@ import {
 
 export default function Menu() {
     const [searchQuery, setSearchQuery] = useState("");
-
     const onChangeSearch = (query) => setSearchQuery(query);
 
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    // const itemsRef = useRef([]);
 
     useEffect(() => {
         const getItems = async () => {
@@ -28,13 +27,43 @@ export default function Menu() {
             );
             const data = await response.json();
 
-            // itemsRef.current = items;
             setItems(data.meals);
             setLoading(false);
         };
 
         getItems();
     }, [searchQuery]);
+
+    const storeData = async (id) => {
+        const data = await getData();
+        // console.log(data);
+        let newCart = {};
+        if (data) {
+            newCart = data;
+            if (newCart[id]) newCart[id]++;
+            else newCart[id] = 1;
+        } else {
+            newCart[id] = 1;
+        }
+        console.log(newCart);
+        try {
+            const jsonValue = JSON.stringify(newCart);
+            await AsyncStorage.setItem("cart", jsonValue);
+        } catch (e) {
+            // saving error
+        }
+    };
+
+    const getData = async () => {
+        // await AsyncStorage.clear();
+        try {
+            const jsonValue = await AsyncStorage.getItem("cart");
+            return jsonValue ? JSON.parse(jsonValue) : {};
+            // console.log(jsonValue);
+        } catch (e) {
+            // error reading value
+        }
+    };
 
     const renderItem = ({ item }) => {
         return (
@@ -56,7 +85,10 @@ export default function Menu() {
                             <IconButton
                                 {...props}
                                 icon="plus"
-                                onPress={() => {}}
+                                onPress={() => {
+                                    alert("Item Added!");
+                                    storeData(item.idMeal);
+                                }}
                             />
                         )}
                     />
