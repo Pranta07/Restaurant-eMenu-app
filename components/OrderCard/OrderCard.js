@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Card, Avatar, IconButton, Badge } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OrderCard = ({ item }) => {
-    const [text, setText] = useState(1);
+    // const [text, setText] = useState(item.quantity);
+
+    const handlePlus = () => {
+        item.quantity++;
+        // setText(item.quantity);
+        updateData(item.quantity);
+    };
+
+    const handleMinus = () => {
+        if (item.quantity > 1) {
+            item.quantity--;
+            // setText(item.quantity);
+            updateData(item.quantity);
+        }
+    };
+
+    const updateData = async (q) => {
+        try {
+            const jsonValue = await AsyncStorage.getItem("cart");
+            const data = jsonValue ? JSON.parse(jsonValue) : {};
+
+            data[item.idMeal] = q;
+
+            await AsyncStorage.setItem("cart", JSON.stringify(data));
+        } catch (e) {
+            // console.log(e.message);
+        }
+    };
 
     return (
         <View style={styles.item}>
@@ -28,30 +56,16 @@ const OrderCard = ({ item }) => {
                         justifyContent: "center",
                     }}
                 >
-                    <IconButton
-                        icon="minus"
-                        size={20}
-                        onPress={() => {
-                            item.quantity--;
-                            setText(item.quantity);
-                        }}
-                    />
+                    <IconButton icon="minus" size={20} onPress={handleMinus} />
                     <Badge
                         size={30}
                         style={{
                             marginHorizontal: 5,
                         }}
                     >
-                        {text}
+                        {item.quantity}
                     </Badge>
-                    <IconButton
-                        icon="plus"
-                        size={20}
-                        onPress={() => {
-                            item.quantity++;
-                            setText(item.quantity);
-                        }}
-                    />
+                    <IconButton icon="plus" size={20} onPress={handlePlus} />
                 </Card.Actions>
             </Card>
         </View>
