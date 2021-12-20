@@ -41,18 +41,16 @@ export default function MyOrders() {
         const newCart = [];
         const keys = Object.keys(data);
         // console.log(keys);
-        for (const key of keys) {
-            // console.log(data[key]);
+        keys.forEach((key) => {
             const item = items.find((item) => item.idMeal == key);
             // console.log(item);
             if (item) {
                 item["quantity"] = data[key];
                 newCart.push(item);
             }
-        }
+        });
         // console.log("newCart", newCart);
         setCart(newCart);
-        // console.log(cart);
     }
 
     const renderItem = ({ item }) => {
@@ -83,6 +81,9 @@ export default function MyOrders() {
                     mode="outlined"
                     style={{
                         margin: 10,
+                    }}
+                    onPress={() => {
+                        alert("Order Placed!");
                     }}
                 >
                     Place Order
