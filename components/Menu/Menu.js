@@ -21,20 +21,18 @@ export default function Menu() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getItems = async () => {
-            const response = await fetch(
-                `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`
-            );
-            const data = await response.json();
-
-            setItems(data.meals);
-            setLoading(false);
-        };
-
-        getItems();
+        fetch(
+            `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                setItems(data.meals);
+                setLoading(false);
+            });
     }, [searchQuery]);
 
     const storeData = async (id) => {
+        // await AsyncStorage.clear();
         const data = await getData();
         // console.log(data);
         let newCart = {};
