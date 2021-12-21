@@ -119,36 +119,40 @@ const MyOrders = () => {
                 renderItem={renderItem}
                 numColumns={1}
             />
-            <Text>Total Price: 1999TK</Text>
-            <TouchableOpacity>
-                <Button
-                    mode="outlined"
-                    style={{
-                        margin: 10,
-                    }}
-                    onPress={() => {
-                        alert("Order Placed!");
-                        // navigate("/pay");
-                    }}
-                >
-                    Place Order
-                </Button>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Button
-                    mode="outlined"
-                    style={{
-                        margin: 10,
-                    }}
-                    onPress={() => {
-                        AsyncStorage.clear();
-                        alert("Now you have no items in your cart!");
-                        navigate("/menu");
-                    }}
-                >
-                    Clear Cart
-                </Button>
-            </TouchableOpacity>
+            <Text>Total Price: 999TK</Text>
+            <View style={styles.buttonConatiner}>
+                <TouchableOpacity style={{ flex: 1 }}>
+                    <Button
+                        mode="outlined"
+                        style={{
+                            margin: 10,
+                        }}
+                        icon="cart-off"
+                        onPress={() => {
+                            AsyncStorage.clear();
+                            alert("Now you have no items in your cart!");
+                            navigate("/menu");
+                        }}
+                    >
+                        Clear Cart
+                    </Button>
+                </TouchableOpacity>
+                <TouchableOpacity style={{ flex: 1 }}>
+                    <Button
+                        mode="outlined"
+                        style={{
+                            margin: 10,
+                        }}
+                        icon="arrow-right-bold-circle-outline"
+                        onPress={() => {
+                            alert("Order Placed!");
+                            // navigate("/pay");
+                        }}
+                    >
+                        Place Order
+                    </Button>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -168,6 +172,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+    },
+    buttonConatiner: {
+        flexDirection: "row",
+        justifyContent: "space-around",
     },
 });
 
