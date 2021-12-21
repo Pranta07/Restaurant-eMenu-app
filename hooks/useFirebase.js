@@ -42,9 +42,8 @@ const useFirebase = () => {
     };
 
     const handleSignIn = (email, password, location, navigate) => {
-        // location, navigate
         setLoading(true);
-        console.log(email, password);
+        // console.log(email, password);
         signInWithEmailAndPassword(auth, email, password)
             .then((Result) => {
                 // Signed in

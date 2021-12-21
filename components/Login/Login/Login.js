@@ -8,7 +8,13 @@ import {
     View,
     Text,
 } from "react-native";
-import { Avatar, TextInput } from "react-native-paper";
+import {
+    Avatar,
+    Button,
+    Colors,
+    IconButton,
+    TextInput,
+} from "react-native-paper";
 
 const Login = () => {
     const [loginInfo, setLoginInfo] = useState({});
@@ -81,6 +87,21 @@ const Login = () => {
                 >
                     <Text style={styles.buttonOutlineText}>Register</Text>
                 </TouchableOpacity>
+                <Text style={[styles.buttonOutlineText, styles.text]}>
+                    --------Or Sign In with--------
+                </Text>
+                <TouchableOpacity
+                    // onPress={handleGoogleSignIn}
+                    style={[styles.button, styles.buttonOutline, styles.google]}
+                >
+                    <IconButton
+                        icon="google"
+                        color={Colors.blue600}
+                        size={20}
+                        style={{ margin: 0, padding: 0 }}
+                    />
+                    <Text style={styles.buttonOutlineText}>Google Sign In</Text>
+                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     );
@@ -130,5 +151,12 @@ const styles = StyleSheet.create({
         color: "#0782F9",
         fontWeight: "700",
         fontSize: 16,
+    },
+    google: {
+        flexDirection: "row",
+        justifyContent: "center",
+    },
+    text: {
+        marginVertical: 10,
     },
 });
