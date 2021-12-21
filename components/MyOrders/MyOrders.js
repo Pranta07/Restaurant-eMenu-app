@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     FlatList,
     StyleSheet,
@@ -15,7 +15,16 @@ export default function MyOrders() {
     const [cart, setCart] = useState([]);
     // console.log(cart.length);
 
-    const getItems = async () => {
+    useEffect(() => {
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`)
+            .then((res) => res.json())
+            .then((data) => {
+                setItems(data.meals);
+                // setLoading(false);
+            })
+            .then(() => updateCart());
+    }, []);
+    /* const getItems = async () => {
         const response = await fetch(
             `https://www.themealdb.com/api/json/v1/1/search.php?s=`
         );
@@ -25,7 +34,7 @@ export default function MyOrders() {
         const data1 = await getData();
         updateCart(data1);
     };
-    getItems();
+    getItems(); */
 
     const getData = async () => {
         try {
@@ -37,24 +46,54 @@ export default function MyOrders() {
         }
     };
 
-    function updateCart(data) {
-        const newCart = [];
+    const updateCart = async () => {
+        const data = await getData();
         const keys = Object.keys(data);
         // console.log(keys);
-        keys.forEach((key) => {
+        const newCart = keys.map((key) => {
             const item = items.find((item) => item.idMeal == key);
             // console.log(item);
             if (item) {
                 item["quantity"] = data[key];
-                newCart.push(item);
             }
+            return item;
         });
         // console.log("newCart", newCart);
         setCart(newCart);
-    }
+    };
+
+    const handlePlus = (id, q) => {
+        updateQuantity(id, q + 1);
+    };
+
+    const handleMinus = (id, q) => {
+        if (q > 1) {
+            updateQuantity(id, q - 1);
+        }
+    };
+
+    const updateQuantity = async (id, q) => {
+        try {
+            const jsonValue = await AsyncStorage.getItem("cart");
+            const data = jsonValue ? JSON.parse(jsonValue) : {};
+
+            data[id] = q;
+
+            await AsyncStorage.setItem("cart", JSON.stringify(data));
+            updateCart();
+        } catch (e) {
+            console.log(e.message);
+        }
+    };
 
     const renderItem = ({ item }) => {
-        return <OrderCard item={item}></OrderCard>;
+        return (
+            <OrderCard
+                item={item}
+                handlePlus={handlePlus}
+                handleMinus={handleMinus}
+            ></OrderCard>
+        );
     };
 
     return (
@@ -87,6 +126,19 @@ export default function MyOrders() {
                     }}
                 >
                     Place Order
+                </Button>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Button
+                    mode="outlined"
+                    style={{
+                        margin: 10,
+                    }}
+                    onPress={() => {
+                        alert("Order Placed!");
+                    }}
+                >
+                    Clear Cart
                 </Button>
             </TouchableOpacity>
         </View>
