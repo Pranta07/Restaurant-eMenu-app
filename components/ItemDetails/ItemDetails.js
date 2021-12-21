@@ -86,19 +86,43 @@ export default function ItemDetails() {
                 </Card.Content>
                 <Card.Actions>
                     <Button
+                        mode="outlined"
+                        icon="cart"
+                        onPress={() => {
+                            alert("Item Added!");
+                            storeData(item.idMeal);
+                        }}
+                        style={{ marginHorizontal: 5 }}
+                    >
+                        Add To Cart
+                    </Button>
+                    <Button
+                        mode="outlined"
+                        icon="food"
                         onPress={() => {
                             alert("Item Added!");
                             storeData(item.idMeal);
                         }}
                     >
-                        Add To Cart
+                        See Menu
                     </Button>
                 </Card.Actions>
             </Card>
 
             <View style={{ margin: 10 }}>
-                <Text>Recipe Video</Text>
-                <YoutubePlayer height={300} videoId={vid} />
+                <Text
+                    style={{
+                        borderLeftWidth: 5,
+                        paddingLeft: 5,
+                        marginVertical: 5,
+                        borderLeftColor: "blueviolet",
+                        fontSize: 24,
+                        color: "blueviolet",
+                    }}
+                >
+                    Recipe
+                </Text>
+                <YoutubePlayer height={300} videoId={vid} style={{ flex: 1 }} />
             </View>
         </ScrollView>
     );
