@@ -23,7 +23,7 @@ export default function MyOrders() {
                 // setLoading(false);
             })
             .then(() => updateCart());
-    }, []);
+    }, [cart]);
     /* const getItems = async () => {
         const response = await fetch(
             `https://www.themealdb.com/api/json/v1/1/search.php?s=`

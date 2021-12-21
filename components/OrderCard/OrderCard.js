@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Card, Avatar, IconButton, Badge } from "react-native-paper";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OrderCard = ({ item, handlePlus, handleMinus }) => {
-    // const [quantity, setQuantitiy] = useState(item.quantity);
-
     return (
         <View style={styles.item}>
             <Card style={styles.card}>
