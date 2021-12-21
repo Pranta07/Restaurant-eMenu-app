@@ -8,58 +8,52 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import OrderCard from "../OrderCard/OrderCard";
-import { Button } from "react-native-paper";
+import { ActivityIndicator, Button, Colors } from "react-native-paper";
 
-export default function MyOrders() {
+const MyOrders = () => {
     const [items, setItems] = useState([]);
     const [cart, setCart] = useState([]);
-    // console.log(cart.length);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`)
             .then((res) => res.json())
             .then((data) => {
                 setItems(data.meals);
-                // setLoading(false);
-            })
-            .then(() => updateCart());
-    }, [cart]);
-    /* const getItems = async () => {
-        const response = await fetch(
-            `https://www.themealdb.com/api/json/v1/1/search.php?s=`
-        );
-        const data = await response.json();
-        setItems(data.meals);
+                updateCart(data.meals);
+            });
+    }, []);
 
-        const data1 = await getData();
-        updateCart(data1);
-    };
-    getItems(); */
-
+    //reading data from async storage
     const getData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem("cart");
             return jsonValue ? JSON.parse(jsonValue) : {};
-            // console.log("getData", data);
         } catch (e) {
             // error reading value
         }
     };
 
-    const updateCart = async () => {
+    //updating cart items with actual data
+    const updateCart = async (items) => {
         const data = await getData();
+        // console.log(data);
+
         const keys = Object.keys(data);
-        // console.log(keys);
+
         const newCart = keys.map((key) => {
-            const item = items.find((item) => item.idMeal == key);
+            const item = items?.find((item) => item.idMeal == key);
             // console.log(item);
             if (item) {
                 item["quantity"] = data[key];
             }
             return item;
         });
-        // console.log("newCart", newCart);
+
         setCart(newCart);
+        // console.log("newCart", newCart);
+        setLoading(false);
     };
 
     const handlePlus = (id, q) => {
@@ -72,6 +66,7 @@ export default function MyOrders() {
         }
     };
 
+    // handle quantity of cart items
     const updateQuantity = async (id, q) => {
         try {
             const jsonValue = await AsyncStorage.getItem("cart");
@@ -80,7 +75,7 @@ export default function MyOrders() {
             data[id] = q;
 
             await AsyncStorage.setItem("cart", JSON.stringify(data));
-            updateCart();
+            updateCart(items);
         } catch (e) {
             console.log(e.message);
         }
@@ -95,6 +90,14 @@ export default function MyOrders() {
             ></OrderCard>
         );
     };
+
+    if (loading) {
+        return (
+            <View style={styles.loading}>
+                <ActivityIndicator animating={true} color={Colors.blue800} />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -143,7 +146,7 @@ export default function MyOrders() {
             </TouchableOpacity>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -156,4 +159,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 2,
     },
+    loading: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
 });
+
+export default MyOrders;
