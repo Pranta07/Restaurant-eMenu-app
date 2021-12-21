@@ -34,6 +34,7 @@ const OrderCard = ({ item, handlePlus, handleMinus }) => {
                     <Badge
                         size={30}
                         style={{
+                            marginVertical: 5,
                             marginHorizontal: 5,
                         }}
                     >

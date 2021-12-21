@@ -6724,6 +6724,11 @@ is-accessor-descriptor@^1.0.0:
   dependencies:
     kind-of "^6.0.0"
 
+is-accessor-descriptor@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/is-accessor-descriptor/-/is-accessor-descriptor-3.0.1.tgz#150ff6455530d42870e52ef4f9ba4ce1f7b3a541"
+  integrity sha512-jMyf1MypU9wJqc76Rryu6dcV0FA2U2ax+lOXLyVcQmipGIzz/tVvdFa/0qTic67qyJve2SciRFSu4BCeIBT7ng==
+
 is-arguments@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/is-arguments/-/is-arguments-1.1.1.tgz#15b3f88fda01f2a97fec84ca761a560f123efa9b"

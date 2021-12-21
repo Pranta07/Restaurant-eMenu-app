@@ -43,7 +43,7 @@ export default function Menu() {
         } else {
             newCart[id] = 1;
         }
-        console.log(newCart);
+        // console.log(newCart);
         try {
             const jsonValue = JSON.stringify(newCart);
             await AsyncStorage.setItem("cart", jsonValue);
