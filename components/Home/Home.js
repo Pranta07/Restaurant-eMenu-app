@@ -1,7 +1,18 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import {
+    Image,
+    ImageBackground,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import { Button } from "react-native-paper";
+import { useNavigate } from "react-router";
 
 export default function Home() {
+    const navigate = useNavigate();
+
     return (
         <ImageBackground
             source={{
@@ -22,6 +33,19 @@ export default function Home() {
                 >
                     Chef Club
                 </Text>
+                <TouchableOpacity>
+                    <Button
+                        mode="contained"
+                        style={{
+                            margin: 10,
+                        }}
+                        onPress={() => {
+                            navigate("/menu");
+                        }}
+                    >
+                        See Menu
+                    </Button>
+                </TouchableOpacity>
             </View>
         </ImageBackground>
     );

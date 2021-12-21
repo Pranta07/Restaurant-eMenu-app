@@ -138,7 +138,7 @@ const MyOrders = () => {
                         margin: 10,
                     }}
                     onPress={() => {
-                        alert("Order Placed!");
+                        alert("Now you have no items in your cart!");
                     }}
                 >
                     Clear Cart
