@@ -80,6 +80,7 @@ const useFirebase = () => {
         signOut(auth)
             .then(() => {
                 // Sign-out successful.
+                alert("Sign-out Successful.");
                 setError("");
                 navigate("/");
             })
