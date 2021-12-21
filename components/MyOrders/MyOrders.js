@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Button, Colors } from "react-native-paper";
+import { useNavigate } from "react-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
     FlatList,
     StyleSheet,
@@ -6,14 +9,13 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import OrderCard from "../OrderCard/OrderCard";
-import { ActivityIndicator, Button, Colors } from "react-native-paper";
 
 const MyOrders = () => {
     const [items, setItems] = useState([]);
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -126,6 +128,7 @@ const MyOrders = () => {
                     }}
                     onPress={() => {
                         alert("Order Placed!");
+                        // navigate("/pay");
                     }}
                 >
                     Place Order
@@ -138,7 +141,9 @@ const MyOrders = () => {
                         margin: 10,
                     }}
                     onPress={() => {
+                        AsyncStorage.clear();
                         alert("Now you have no items in your cart!");
+                        navigate("/menu");
                     }}
                 >
                     Clear Cart
