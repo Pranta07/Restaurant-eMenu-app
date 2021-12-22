@@ -66,7 +66,8 @@ const useFirebase = () => {
             .then((result) => {
                 // const user = result.user;
                 setError("");
-                navigate(location?.state?.from);
+                // navigate(location?.state?.from);
+                navigate("/");
             })
             .catch((error) => {
                 setError(error.message);

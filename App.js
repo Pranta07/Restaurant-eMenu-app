@@ -9,6 +9,7 @@ import Menu from "./components/Menu/Menu";
 import MyOrders from "./components/MyOrders/MyOrders";
 import Login from "./components/Login/Login/Login";
 import ItemDetails from "./components/ItemDetails/ItemDetails";
+import Payment from "./components/Payment/Payment";
 
 export default function App() {
     return (
@@ -22,6 +23,7 @@ export default function App() {
                         <Route path="/menu" element={<Menu />} />
                         <Route path="/details/:id" element={<ItemDetails />} />
                         <Route path="/orders" element={<MyOrders />} />
+                        <Route path="/pay" element={<Payment />} />
                         <Route path="/login" element={<Login />} />
                     </Routes>
                 </NativeRouter>

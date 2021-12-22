@@ -18,7 +18,7 @@ import {
 
 const Login = () => {
     const [loginInfo, setLoginInfo] = useState({});
-    const { handleSignIn, handleRegister } = useAuth();
+    const { handleSignIn, handleRegister, handleGoogleSignIn } = useAuth();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -31,6 +31,11 @@ const Login = () => {
     const handleRegisterSubmit = (e) => {
         e.preventDefault();
         handleRegister(loginInfo.email, loginInfo.password, navigate);
+    };
+
+    const handleLoginWithGoogle = (e) => {
+        e.preventDefault();
+        handleGoogleSignIn(location, navigate);
     };
 
     /* const handleChange = (e) => {
@@ -91,7 +96,7 @@ const Login = () => {
                     --------Or Sign In with--------
                 </Text>
                 <TouchableOpacity
-                    // onPress={handleGoogleSignIn}
+                    // onPress={handleLoginWithGoogle}
                     style={[styles.button, styles.buttonOutline, styles.google]}
                 >
                     <IconButton
