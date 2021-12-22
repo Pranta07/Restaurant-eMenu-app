@@ -145,7 +145,7 @@ const MyOrders = () => {
                         }}
                         icon="arrow-right-bold-circle-outline"
                         onPress={() => {
-                            alert("Order Placed!");
+                            // alert("Order Placed!");
                             navigate("/pay");
                         }}
                     >

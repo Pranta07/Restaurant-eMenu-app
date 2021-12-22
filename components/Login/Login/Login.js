@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
-import { useLocation, useNavigate } from "react-router-native";
+import { useNavigate } from "react-router-native";
 import {
     StyleSheet,
     KeyboardAvoidingView,
@@ -8,24 +8,17 @@ import {
     View,
     Text,
 } from "react-native";
-import {
-    Avatar,
-    Button,
-    Colors,
-    IconButton,
-    TextInput,
-} from "react-native-paper";
+import { Avatar, Colors, IconButton, TextInput } from "react-native-paper";
 
 const Login = () => {
     const [loginInfo, setLoginInfo] = useState({});
     const { handleSignIn, handleRegister, handleGoogleSignIn } = useAuth();
 
-    const location = useLocation();
     const navigate = useNavigate();
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        handleSignIn(loginInfo.email, loginInfo.password, location, navigate);
+        handleSignIn(loginInfo.email, loginInfo.password, navigate);
     };
 
     const handleRegisterSubmit = (e) => {

@@ -41,7 +41,7 @@ const useFirebase = () => {
             .finally(() => setLoading(false));
     };
 
-    const handleSignIn = (email, password, location, navigate) => {
+    const handleSignIn = (email, password, navigate) => {
         setLoading(true);
         // console.log(email, password);
         signInWithEmailAndPassword(auth, email, password)
