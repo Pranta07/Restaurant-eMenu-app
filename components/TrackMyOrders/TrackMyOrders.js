@@ -85,7 +85,11 @@ const TrackMyOrders = () => {
 
     return (
         <View style={styles.container}>
-            <Text>You have Ordered {mergeOrders.length} Items!</Text>
+            <Text
+                style={{ fontSize: 20, fontWeight: "bold", marginVertical: 10 }}
+            >
+                You have Ordered {mergeOrders.length} Items!
+            </Text>
             <FlatList
                 data={mergeOrders}
                 keyExtractor={(item) => item.name}
