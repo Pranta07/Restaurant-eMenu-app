@@ -28,6 +28,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "A Mobile app for restaurants to provide a contact-less menu to their customers from where a customer can order foods and also pay the money in one click. The chef can track all orders and update the status of each order accordingly. Customers can track the status of the foods they ordered."
   }
 }
