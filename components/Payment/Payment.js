@@ -38,6 +38,7 @@ const Payment = () => {
             <TouchableOpacity>
                 <Button
                     mode="contained"
+                    icon="credit-card-multiple"
                     style={{
                         margin: 10,
                     }}
