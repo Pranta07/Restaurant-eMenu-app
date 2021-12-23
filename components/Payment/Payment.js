@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Button } from "react-native-paper";
+import { useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 
 const Payment = () => {
     const [myOrders, setMyOrders] = useState([]);
     const { user } = useAuth();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(
@@ -17,6 +20,12 @@ const Payment = () => {
                 setMyOrders(data);
             });
     }, []);
+
+    const handlePay = () => {
+        //payment status update korte hobe db te.
+        alert("Payment Success!");
+        // navigate("/trackMyOrders");
+    };
 
     const totalPrice = myOrders.reduce(
         (previous, current) => previous + current.price,
@@ -33,7 +42,7 @@ const Payment = () => {
                         margin: 10,
                     }}
                     onPress={() => {
-                        navigate("/myOrders");
+                        handlePay();
                     }}
                 >
                     Pay {totalPrice} TK

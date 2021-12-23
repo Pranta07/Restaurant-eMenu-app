@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+    FlatList,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 import {
     ActivityIndicator,
     Avatar,
     Badge,
+    Button,
     Card,
     Colors,
     IconButton,
 } from "react-native-paper";
+import { useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 
 const TrackMyOrders = () => {
     const [myOrders, setMyOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [foodStatus, setFoodStatus] = useState("");
     const { user } = useAuth();
+
+    const navigate = useNavigate();
 
     const mergeOrders = [];
     myOrders?.forEach((order) => {
@@ -97,6 +106,19 @@ const TrackMyOrders = () => {
                 renderItem={renderItem}
                 numColumns={1}
             />
+            <TouchableOpacity>
+                <Button
+                    mode="contained"
+                    style={{
+                        margin: 10,
+                    }}
+                    onPress={() => {
+                        navigate("/pay");
+                    }}
+                >
+                    Pay
+                </Button>
+            </TouchableOpacity>
         </View>
     );
 };
