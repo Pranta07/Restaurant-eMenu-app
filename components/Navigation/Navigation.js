@@ -54,7 +54,7 @@ const Navigation = () => {
             {user.email && (
                 <Link to="/trackMyOrders">
                     <Appbar.Action
-                        icon=""
+                        icon="food-fork-drink"
                         color="blueviolet"
                         style={{ backgroundColor: "white" }}
                     />
