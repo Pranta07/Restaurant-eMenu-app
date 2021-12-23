@@ -114,7 +114,7 @@ const MyOrders = () => {
 
         orderDetails["orderedItems"] = orderedItems;
         orderDetails["price"] = price;
-        orderDetails["status"] = false;
+        orderDetails["foodStatus"] = "Pending";
 
         //send orderdetails data to server
         fetch("https://mighty-thicket-60343.herokuapp.com/orders", {
