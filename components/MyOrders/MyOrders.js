@@ -178,6 +178,7 @@ const MyOrders = () => {
                     <TouchableOpacity>
                         <Button
                             mode="contained"
+                            icon="food"
                             style={{
                                 margin: 10,
                             }}

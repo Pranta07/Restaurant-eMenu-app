@@ -36,6 +36,7 @@ export default function Home() {
                 <TouchableOpacity>
                     <Button
                         mode="contained"
+                        icon="food"
                         style={{
                             margin: 10,
                         }}
