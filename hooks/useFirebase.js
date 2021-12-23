@@ -30,7 +30,7 @@ const useFirebase = () => {
                 // const user = Result.user;
                 alert("Registered Success!");
                 // setUser({ displayName: name, email: email });
-                //saveUser(name, email); //save user info to db
+                saveUser(email, "customer"); //save user info to db
                 // handleUpdate(name);
                 setError("");
                 navigate("/");
@@ -39,6 +39,17 @@ const useFirebase = () => {
                 setError(error.message);
             })
             .finally(() => setLoading(false));
+    };
+
+    const saveUser = (email, role) => {
+        const userData = { email, role };
+        fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        });
     };
 
     const handleSignIn = (email, password, navigate) => {
@@ -57,7 +68,7 @@ const useFirebase = () => {
             .finally(() => setLoading(false));
     };
 
-    const handleGoogleSignIn = (location, navigate) => {
+    const handleGoogleSignIn = (navigate) => {
         setLoading(true);
 
         const googleProvider = new GoogleAuthProvider();

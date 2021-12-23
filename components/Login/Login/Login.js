@@ -8,11 +8,23 @@ import {
     View,
     Text,
 } from "react-native";
-import { Avatar, Colors, IconButton, TextInput } from "react-native-paper";
+import {
+    Avatar,
+    Colors,
+    IconButton,
+    Snackbar,
+    TextInput,
+} from "react-native-paper";
 
 const Login = () => {
+    const [visible, setVisible] = useState(true);
     const [loginInfo, setLoginInfo] = useState({});
-    const { handleSignIn, handleRegister, handleGoogleSignIn } = useAuth();
+    const { handleSignIn, handleRegister, handleGoogleSignIn, error } =
+        useAuth();
+
+    // if (error) setVisible(true);
+
+    const onDismissSnackBar = () => setVisible(false);
 
     const navigate = useNavigate();
 
@@ -100,6 +112,17 @@ const Login = () => {
                     />
                     <Text style={styles.buttonOutlineText}>Google Sign In</Text>
                 </TouchableOpacity>
+                {error.length > 0 && (
+                    <Snackbar
+                        visible={visible}
+                        onDismiss={onDismissSnackBar}
+                        action={{
+                            label: "Hide",
+                        }}
+                    >
+                        {error}
+                    </Snackbar>
+                )}
             </View>
         </KeyboardAvoidingView>
     );
