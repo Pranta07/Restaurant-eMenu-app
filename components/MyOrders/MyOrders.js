@@ -83,6 +83,9 @@ const MyOrders = () => {
         }
     };
 
+    //handle order placing
+    const handlePlaceOrder = () => {};
+
     const renderItem = ({ item }) => {
         return (
             <OrderCard
@@ -146,6 +149,7 @@ const MyOrders = () => {
                         icon="arrow-right-bold-circle-outline"
                         onPress={() => {
                             // alert("Order Placed!");
+                            handlePlaceOrder();
                             navigate("/pay");
                         }}
                     >

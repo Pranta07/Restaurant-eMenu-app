@@ -22,8 +22,6 @@ const Login = () => {
     const { handleSignIn, handleRegister, handleGoogleSignIn, error } =
         useAuth();
 
-    // if (error) setVisible(true);
-
     const onDismissSnackBar = () => setVisible(false);
 
     const navigate = useNavigate();
@@ -40,16 +38,8 @@ const Login = () => {
 
     const handleLoginWithGoogle = (e) => {
         e.preventDefault();
-        handleGoogleSignIn(location, navigate);
+        handleGoogleSignIn(navigate);
     };
-
-    /* const handleChange = (e) => {
-        const newInfo = { ...loginInfo };
-        const name = e.target.name;
-        newInfo[name] = e.target.value;
-        setLoginInfo(newInfo);
-        // console.log(name, newInfo);
-    }; */
 
     return (
         <KeyboardAvoidingView style={styles.container}>

@@ -43,7 +43,7 @@ const useFirebase = () => {
 
     const saveUser = (email, role) => {
         const userData = { email, role };
-        fetch("http://localhost:5000/users", {
+        fetch("https://mighty-thicket-60343.herokuapp.com/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -113,17 +113,6 @@ const useFirebase = () => {
                 setError(error.message);
             });
     };
-
-    /* const saveUser = (name, email) => {
-        const userData = { name, email };
-        fetch("https://frozen-inlet-30875.herokuapp.com/users", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(userData),
-        });
-    }; */
 
     // observer of changing of auth sate
     useEffect(() => {
