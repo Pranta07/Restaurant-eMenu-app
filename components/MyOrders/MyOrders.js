@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Button, Colors } from "react-native-paper";
+import {
+    ActivityIndicator,
+    Button,
+    Colors,
+    Snackbar,
+} from "react-native-paper";
 import { useNavigate } from "react-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -10,11 +15,19 @@ import {
     View,
 } from "react-native";
 import OrderCard from "../OrderCard/OrderCard";
+import useAuth from "../../hooks/useAuth";
 
 const MyOrders = () => {
+    const [visible, setVisible] = useState(true);
     const [items, setItems] = useState([]);
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const { user } = useAuth();
+    const [orderDetails, setOrderDetials] = useState({
+        email: user.email,
+    });
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,6 +39,8 @@ const MyOrders = () => {
                 updateCart(data.meals);
             });
     }, []);
+
+    const onDismissSnackBar = () => setVisible(false);
 
     //reading data from async storage
     const getData = async () => {
@@ -84,7 +99,40 @@ const MyOrders = () => {
     };
 
     //handle order placing
-    const handlePlaceOrder = () => {};
+    const handlePlaceOrder = () => {
+        // console.log(orderDetails);
+        let price = 0;
+        const orderedItems = cart.map((item) => {
+            price += item.quantity * 100;
+            const newItem = {
+                name: item.strMeal,
+                quantity: item.quantity,
+                img: item.strMealThumb,
+            };
+            return newItem;
+        });
+
+        orderDetails["orderedItems"] = orderedItems;
+        orderDetails["price"] = price;
+        orderDetails["status"] = false;
+
+        //send orderdetails data to server
+        fetch("https://mighty-thicket-60343.herokuapp.com/orders", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(orderDetails),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                if (result.insertedId) {
+                    alert("Your Order Placed Successfully");
+                    AsyncStorage.clear();
+                }
+            })
+            .finally(() => navigate("/pay"));
+    };
 
     const renderItem = ({ item }) => {
         return (
@@ -106,16 +154,41 @@ const MyOrders = () => {
 
     return (
         <View style={styles.container}>
-            <Text
-                style={{
-                    fontSize: 24,
-                    fontWeight: "bold",
-                    color: "blueviolet",
-                    marginVertical: 10,
-                }}
-            >
-                Items You Added
-            </Text>
+            {cart.length > 0 && (
+                <Text
+                    style={{
+                        fontSize: 24,
+                        fontWeight: "bold",
+                        color: "blueviolet",
+                        marginVertical: 10,
+                    }}
+                >
+                    Items You Added
+                </Text>
+            )}
+            {cart.length == 0 && (
+                <View
+                    style={{
+                        height: "100%",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Text>No Items in your cart yet! Go to menu page!</Text>
+                    <TouchableOpacity>
+                        <Button
+                            mode="contained"
+                            style={{
+                                margin: 10,
+                            }}
+                            onPress={() => {
+                                navigate("/menu");
+                            }}
+                        >
+                            See Menu
+                        </Button>
+                    </TouchableOpacity>
+                </View>
+            )}
             <FlatList
                 data={cart}
                 keyExtractor={(item) => item?.idMeal}
@@ -150,12 +223,22 @@ const MyOrders = () => {
                         onPress={() => {
                             // alert("Order Placed!");
                             handlePlaceOrder();
-                            navigate("/pay");
+                            // navigate("/pay");
                         }}
+                        disabled={user.email ? false : true}
                     >
                         Place Order
                     </Button>
                 </TouchableOpacity>
+                <Snackbar
+                    visible={visible}
+                    onDismiss={onDismissSnackBar}
+                    action={{
+                        label: "Hide",
+                    }}
+                >
+                    Before Placing Order You have to login first!
+                </Snackbar>
             </View>
         </View>
     );
