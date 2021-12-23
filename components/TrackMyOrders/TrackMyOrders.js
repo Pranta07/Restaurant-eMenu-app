@@ -41,7 +41,7 @@ const TrackMyOrders = () => {
                 <Card style={styles.card}>
                     <Card.Title
                         title={item?.name}
-                        subtitle={`Status: ${foodStatus}`}
+                        subtitle={`Food Status: ${item?.status}`}
                         left={(props) => (
                             <Avatar.Image
                                 {...props}
