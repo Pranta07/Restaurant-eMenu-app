@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import Navigation from "./components/Navigation/Navigation";
 import { AuthProvider } from "./contexts/AuthProvider";
@@ -17,6 +17,11 @@ export default function App() {
         <AuthProvider>
             <PaperProvider style={styles.container}>
                 <NativeRouter>
+                    <StatusBar
+                        animated={true}
+                        backgroundColor="#61dafb"
+                        hidden={false}
+                    />
                     <Navigation></Navigation>
                     <Routes>
                         <Route index path="/" element={<Home />} />
