@@ -13,6 +13,7 @@ import useAuth from "../../hooks/useAuth";
 const TrackMyOrders = () => {
     const [myOrders, setMyOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [foodStatus, setFoodStatus] = useState("");
     const { user } = useAuth();
 
     const mergeOrders = [];
@@ -40,7 +41,7 @@ const TrackMyOrders = () => {
                 <Card style={styles.card}>
                     <Card.Title
                         title={item?.name}
-                        subtitle={`Status: Pending`}
+                        subtitle={`Status: ${foodStatus}`}
                         left={(props) => (
                             <Avatar.Image
                                 {...props}

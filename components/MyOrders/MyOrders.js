@@ -108,6 +108,7 @@ const MyOrders = () => {
                 name: item.strMeal,
                 quantity: item.quantity,
                 img: item.strMealThumb,
+                status: "Pending",
             };
             return newItem;
         });
