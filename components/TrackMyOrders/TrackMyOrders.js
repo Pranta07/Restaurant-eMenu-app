@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import {
     ActivityIndicator,
     Avatar,
+    Badge,
     Card,
     Colors,
     IconButton,
@@ -50,9 +51,22 @@ const TrackMyOrders = () => {
                             />
                         )}
                         right={(props) => (
-                            <View style={{ flex: 1 }}>
+                            <View
+                                style={{
+                                    flex: 1,
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                }}
+                            >
                                 <IconButton {...props} icon="food" />
-                                <Text>{item.quantity}</Text>
+                                <Badge
+                                    style={{
+                                        marginBottom: 25,
+                                        marginRight: 10,
+                                    }}
+                                >
+                                    X {item.quantity}
+                                </Badge>
                             </View>
                         )}
                     />
