@@ -51,6 +51,15 @@ const Navigation = () => {
                     </Badge>
                 </View>
             </Link>
+            {user.email && (
+                <Link to="/trackMyOrders">
+                    <Appbar.Action
+                        icon=""
+                        color="blueviolet"
+                        style={{ backgroundColor: "white" }}
+                    />
+                </Link>
+            )}
             {user.email ? (
                 <Appbar.Action
                     icon="logout"

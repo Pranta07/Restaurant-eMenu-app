@@ -11,6 +11,7 @@ import Login from "./components/Login/Login/Login";
 import ItemDetails from "./components/ItemDetails/ItemDetails";
 import Payment from "./components/Payment/Payment";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import TrackMyOrders from "./components/TrackMyOrders/TrackMyOrders";
 
 export default function App() {
     return (
@@ -29,6 +30,10 @@ export default function App() {
                         <Route path="/menu" element={<Menu />} />
                         <Route path="/details/:id" element={<ItemDetails />} />
                         <Route path="/orders" element={<MyOrders />} />
+                        <Route
+                            path="/trackMyOrders"
+                            element={<TrackMyOrders />}
+                        />
                         <Route
                             path="/pay"
                             element={
