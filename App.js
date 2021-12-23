@@ -32,7 +32,11 @@ export default function App() {
                         <Route path="/orders" element={<MyOrders />} />
                         <Route
                             path="/trackMyOrders"
-                            element={<TrackMyOrders />}
+                            element={
+                                <PrivateRoute>
+                                    <TrackMyOrders />
+                                </PrivateRoute>
+                            }
                         />
                         <Route
                             path="/pay"

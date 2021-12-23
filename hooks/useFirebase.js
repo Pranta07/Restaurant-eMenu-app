@@ -77,7 +77,6 @@ const useFirebase = () => {
             .then((result) => {
                 // const user = result.user;
                 setError("");
-                // navigate(location?.state?.from);
                 navigate("/");
             })
             .catch((error) => {
@@ -93,7 +92,6 @@ const useFirebase = () => {
                 // Sign-out successful.
                 alert("Sign-out Successful.");
                 setError("");
-                navigate("/");
             })
             .catch((error) => {
                 setError(error.message);
