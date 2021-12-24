@@ -12,13 +12,18 @@ const Navigation = () => {
     const [admin, setAdmin] = React.useState(false);
 
     React.useEffect(() => {
-        fetch(`https://mighty-thicket-60343.herokuapp.com/users/${user.email}`)
-            .then((res) => res.json())
-            .then((user) => {
-                // console.log(user.role);
-                if (user?.role === "admin" || user?.role === "chef")
-                    setAdmin(true);
-            });
+        setAdmin(false);
+        if (user.email) {
+            fetch(
+                `https://mighty-thicket-60343.herokuapp.com/users/${user.email}`
+            )
+                .then((res) => res.json())
+                .then((user) => {
+                    console.log(user.role);
+                    if (user?.role === "admin" || user?.role === "chef")
+                        setAdmin(true);
+                });
+        }
     }, [user.email]);
 
     return (
