@@ -16,7 +16,7 @@ const AdminRoute = ({ children }) => {
             .then((res) => res.json())
             .then((user) => {
                 // console.log(user.role);
-                if (user.role === "admin" || user.role === "chef")
+                if (user?.role === "admin" || user?.role === "chef")
                     setAdmin(true);
             })
             .finally(() => setDone(true));

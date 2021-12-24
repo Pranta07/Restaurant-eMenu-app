@@ -9,10 +9,14 @@ import {
     IconButton,
 } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import useAuth from "../../hooks/useAuth";
 
 const AllOrders = () => {
     const [allOrders, setAllOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [admin, setAdmin] = useState(false);
+
+    const { user } = useAuth();
 
     useEffect(() => {
         setLoading(true);
@@ -24,6 +28,16 @@ const AllOrders = () => {
                 setLoading(false);
             });
     }, []);
+
+    useEffect(() => {
+        fetch(`https://mighty-thicket-60343.herokuapp.com/users/${user.email}`)
+            .then((res) => res.json())
+            .then((user) => {
+                // console.log(user.role);
+                if (user?.role === "admin" || user?.role === "chef")
+                    setAdmin(true);
+            });
+    }, [user.email]);
 
     const renderItem = ({ item }) => {
         const items = item.orderedItems;
@@ -97,15 +111,17 @@ const AllOrders = () => {
                         />
                     </Card>
                 ))}
-                <Button
-                    mode="contained"
-                    icon="update"
-                    style={{
-                        marginHorizontal: 5,
-                    }}
-                >
-                    Update Food Status
-                </Button>
+                {!admin && (
+                    <Button
+                        mode="contained"
+                        icon="update"
+                        style={{
+                            marginHorizontal: 5,
+                        }}
+                    >
+                        Update Food Status
+                    </Button>
+                )}
             </View>
         );
     };
