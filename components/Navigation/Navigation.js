@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Appbar, Badge } from "react-native-paper";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import useAuth from "../../hooks/useAuth";
 import useCart from "../../hooks/useCart";
 import { Link } from "react-router-native";
@@ -9,6 +9,17 @@ const Navigation = () => {
     const { user, handleSignOut } = useAuth();
     const { data } = useCart();
     const da = Object.keys(data);
+    const [admin, setAdmin] = React.useState(false);
+
+    React.useEffect(() => {
+        fetch(`https://mighty-thicket-60343.herokuapp.com/users/${user.email}`)
+            .then((res) => res.json())
+            .then((user) => {
+                // console.log(user.role);
+                if (user.role === "admin" || user.role === "chef")
+                    setAdmin(true);
+            });
+    }, [user.email]);
 
     return (
         <Appbar style={styles.bottom}>
@@ -55,6 +66,15 @@ const Navigation = () => {
                 <Link to="/trackMyOrders">
                     <Appbar.Action
                         icon="food-fork-drink"
+                        color="blueviolet"
+                        style={{ backgroundColor: "white" }}
+                    />
+                </Link>
+            )}
+            {admin && (
+                <Link to="/allOrders">
+                    <Appbar.Action
+                        icon="chef-hat"
                         color="blueviolet"
                         style={{ backgroundColor: "white" }}
                     />
