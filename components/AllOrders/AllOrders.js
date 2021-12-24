@@ -22,6 +22,7 @@ const AllOrders = () => {
     const [loading, setLoading] = useState(true);
     const [chef, setChef] = useState(false);
     const [done, setDone] = useState(false);
+    const [update, setUpdate] = useState(false);
 
     const { user } = useAuth();
 
@@ -42,10 +43,29 @@ const AllOrders = () => {
                 if (user.role === "chef") setChef(true);
             })
             .finally(() => setDone(true));
-    }, []);
+    }, [update]);
 
     const renderItem = ({ item }) => {
         const items = item.orderedItems;
+        const handleUpdate = (id) => {
+            setUpdate(false);
+            fetch(`https://mighty-thicket-60343.herokuapp.com/order/${id}`, {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify({ status: "Delivered" }),
+            })
+                .then((res) => res.json())
+                .then((result) => {
+                    if (result.modifiedCount) {
+                        alert("Updated Successfully!");
+                        setUpdate(true);
+                    } else {
+                        alert("Already Delivered!");
+                    }
+                });
+        };
         return (
             <View style={styles.box}>
                 <View
@@ -123,6 +143,9 @@ const AllOrders = () => {
                             icon="update"
                             style={{
                                 marginHorizontal: 5,
+                            }}
+                            onPress={() => {
+                                handleUpdate(item._id);
                             }}
                         >
                             Update Food Status
