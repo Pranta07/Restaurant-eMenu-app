@@ -4,6 +4,7 @@ import {
     ActivityIndicator,
     Avatar,
     Badge,
+    Button,
     Card,
     IconButton,
 } from "react-native-paper";
@@ -96,6 +97,15 @@ const AllOrders = () => {
                         />
                     </Card>
                 ))}
+                <Button
+                    mode="contained"
+                    icon="update"
+                    style={{
+                        marginHorizontal: 5,
+                    }}
+                >
+                    Update Food Status
+                </Button>
             </View>
         );
     };
