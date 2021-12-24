@@ -39,6 +39,7 @@ const Payment = () => {
                     navigate("/trackMyOrders");
                 } else {
                     alert("Already Paid!");
+                    navigate("/trackMyOrders");
                 }
             });
     };
