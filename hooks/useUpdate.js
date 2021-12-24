@@ -1,4 +1,4 @@
-const useUpdate = (status, email, navigate) => {
+const useUpdate = (status, email) => {
     const data = { status };
 
     fetch(`https://mighty-thicket-60343.herokuapp.com/food/${email}`, {
