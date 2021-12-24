@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, StatusBar } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import Navigation from "./components/Navigation/Navigation";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { NativeRouter, Routes, Route } from "react-router-native";
+import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
 import Menu from "./components/Menu/Menu";
 import MyOrders from "./components/MyOrders/MyOrders";
@@ -12,6 +12,8 @@ import ItemDetails from "./components/ItemDetails/ItemDetails";
 import Payment from "./components/Payment/Payment";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import TrackMyOrders from "./components/TrackMyOrders/TrackMyOrders";
+import AllOrders from "./components/AllOrders/AllOrders";
+import AdminRoute from "./components/AdminRoute/AdminRoute";
 
 export default function App() {
     return (
@@ -30,6 +32,14 @@ export default function App() {
                         <Route path="/menu" element={<Menu />} />
                         <Route path="/details/:id" element={<ItemDetails />} />
                         <Route path="/orders" element={<MyOrders />} />
+                        <Route
+                            path="/allOrders"
+                            element={
+                                <AdminRoute>
+                                    <AllOrders />
+                                </AdminRoute>
+                            }
+                        />
                         <Route
                             path="/trackMyOrders"
                             element={
