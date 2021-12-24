@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import YoutubePlayer from "react-native-youtube-iframe";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button, Card, ActivityIndicator, Colors } from "react-native-paper";
@@ -8,6 +8,8 @@ import { Button, Card, ActivityIndicator, Colors } from "react-native-paper";
 export default function ItemDetails() {
     const [item, setItem] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     const { id } = useParams();
     const vid = item?.strYoutube?.split("=")[1];
@@ -100,8 +102,7 @@ export default function ItemDetails() {
                         mode="outlined"
                         icon="food"
                         onPress={() => {
-                            alert("Item Added!");
-                            storeData(item.idMeal);
+                            navigate("/menu");
                         }}
                     >
                         See Menu
