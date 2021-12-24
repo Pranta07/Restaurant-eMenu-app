@@ -47,10 +47,14 @@ const Payment = () => {
             });
     };
 
-    const totalPrice = myOrders.reduce(
-        (previous, current) => previous + current.price,
-        0
-    );
+    // const totalPrice = myOrders.reduce(
+    //     (previous, current) => previous + current.price,
+    //     0
+    // );
+    let totalPrice = 0;
+    myOrders.forEach((order) => {
+        if (order.paymentStatus === false) totalPrice += order.price;
+    });
 
     if (loading) {
         return (
