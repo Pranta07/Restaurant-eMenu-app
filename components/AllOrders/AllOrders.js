@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+    FlatList,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 import {
     ActivityIndicator,
     Avatar,
@@ -111,15 +117,17 @@ const AllOrders = () => {
                     </Card>
                 ))}
                 {chef && (
-                    <Button
-                        mode="contained"
-                        icon="update"
-                        style={{
-                            marginHorizontal: 5,
-                        }}
-                    >
-                        Update Food Status
-                    </Button>
+                    <TouchableOpacity>
+                        <Button
+                            mode="contained"
+                            icon="update"
+                            style={{
+                                marginHorizontal: 5,
+                            }}
+                        >
+                            Update Food Status
+                        </Button>
+                    </TouchableOpacity>
                 )}
             </View>
         );
