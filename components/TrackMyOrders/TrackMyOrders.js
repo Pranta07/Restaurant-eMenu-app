@@ -29,6 +29,7 @@ const TrackMyOrders = () => {
     myOrders?.forEach((order) => {
         const items = order.orderedItems;
         items?.forEach((item) => {
+            item.status = order.foodStatus;
             mergeOrders.push(item);
         });
     });

@@ -108,13 +108,13 @@ const MyOrders = () => {
                 name: item.strMeal,
                 quantity: item.quantity,
                 img: item.strMealThumb,
-                status: "Pending",
             };
             return newItem;
         });
 
         orderDetails["orderedItems"] = orderedItems;
         orderDetails["price"] = price;
+        orderDetails["paymentStatus"] = false;
         orderDetails["foodStatus"] = "Pending";
 
         //send orderdetails data to server

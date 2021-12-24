@@ -37,6 +37,8 @@ const Payment = () => {
                 if (result.modifiedCount) {
                     alert("Payment Success!");
                     navigate("/trackMyOrders");
+                } else {
+                    alert("Already Paid!");
                 }
             });
     };
