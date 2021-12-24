@@ -16,12 +16,20 @@ import {
 } from "react-native";
 import OrderCard from "../OrderCard/OrderCard";
 import useAuth from "../../hooks/useAuth";
+import useCart from "../../hooks/useCart";
 
 const MyOrders = () => {
     const [visible, setVisible] = useState(true);
     const [items, setItems] = useState([]);
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const { data } = useCart();
+    const keys = Object.keys(data);
+    let price = 0;
+    keys.forEach((key) => {
+        price += data[key] * 100;
+    });
 
     const { user } = useAuth();
     const [orderDetails, setOrderDetials] = useState({
@@ -197,7 +205,7 @@ const MyOrders = () => {
                 renderItem={renderItem}
                 numColumns={1}
             />
-            <Text>Total Price: 999TK</Text>
+            <Text>Total Price: {price}TK</Text>
             <View style={styles.buttonConatiner}>
                 <TouchableOpacity style={{ flex: 1 }}>
                     <Button
