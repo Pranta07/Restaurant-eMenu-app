@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ActivityIndicator, Button, Colors } from "react-native-paper";
 import { useNavigate, useParams } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import useUpdate from "../../hooks/useUpdate";
 
 const Payment = () => {
     const [myOrders, setMyOrders] = useState([]);
@@ -37,6 +38,8 @@ const Payment = () => {
                 if (result.modifiedCount) {
                     alert("Payment Success!");
                     navigate("/trackMyOrders");
+                    //updating food status
+                    useUpdate("Processing", user.email);
                 } else {
                     alert("Already Paid!");
                     navigate("/trackMyOrders");
