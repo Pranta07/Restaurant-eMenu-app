@@ -78,7 +78,7 @@ export default function ItemDetails() {
                     <Card.Title
                         style={{ flex: 1 }}
                         title={`${item.strArea} Food`}
-                        subtitle={"199TK"}
+                        subtitle={"100TK"}
                     />
                 </View>
                 <Card.Content>

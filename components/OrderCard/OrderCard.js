@@ -8,7 +8,7 @@ const OrderCard = ({ item, handlePlus, handleMinus }) => {
             <Card style={styles.card}>
                 <Card.Title
                     title={item?.strMeal}
-                    subtitle="Price: 250"
+                    subtitle="Price: 100TK"
                     left={(props) => (
                         <Avatar.Image
                             {...props}
