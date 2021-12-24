@@ -14,11 +14,13 @@ import useAuth from "../../hooks/useAuth";
 const AllOrders = () => {
     const [allOrders, setAllOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [admin, setAdmin] = useState(false);
+    const [chef, setChef] = useState(false);
+    const [done, setDone] = useState(false);
 
     const { user } = useAuth();
 
     useEffect(() => {
+        setDone(false);
         setLoading(true);
         fetch(`https://mighty-thicket-60343.herokuapp.com/manage/orders`)
             .then((res) => res.json())
@@ -27,17 +29,14 @@ const AllOrders = () => {
                 setAllOrders(data);
                 setLoading(false);
             });
-    }, []);
-
-    useEffect(() => {
         fetch(`https://mighty-thicket-60343.herokuapp.com/users/${user.email}`)
             .then((res) => res.json())
             .then((user) => {
-                // console.log(user.role);
-                if (user?.role === "admin" || user?.role === "chef")
-                    setAdmin(true);
-            });
-    }, [user.email]);
+                console.log(user.role, chef);
+                if (user.role === "chef") setChef(true);
+            })
+            .finally(() => setDone(true));
+    }, []);
 
     const renderItem = ({ item }) => {
         const items = item.orderedItems;
@@ -111,7 +110,7 @@ const AllOrders = () => {
                         />
                     </Card>
                 ))}
-                {!admin && (
+                {chef && (
                     <Button
                         mode="contained"
                         icon="update"
@@ -126,7 +125,7 @@ const AllOrders = () => {
         );
     };
 
-    if (loading) {
+    if (loading || !done) {
         return (
             <View style={styles.loading}>
                 <ActivityIndicator animating={true} color={Colors.blue800} />
