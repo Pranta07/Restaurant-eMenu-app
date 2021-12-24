@@ -1,5 +1,6 @@
-const useUpdate = (status, email) => {
+const useUpdate = (status, email, navigate) => {
     const data = { status };
+
     fetch(`https://mighty-thicket-60343.herokuapp.com/food/${email}`, {
         method: "PUT",
         headers: {
@@ -9,7 +10,10 @@ const useUpdate = (status, email) => {
     })
         .then((res) => res.json())
         .then((result) => {
-            console.log(result);
+            if (result.modifiedCount) {
+                alert("Your foods are processing!");
+            }
         });
 };
+
 export default useUpdate;
