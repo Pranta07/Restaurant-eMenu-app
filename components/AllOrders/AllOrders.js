@@ -32,7 +32,7 @@ const AllOrders = () => {
         fetch(`https://mighty-thicket-60343.herokuapp.com/users/${user.email}`)
             .then((res) => res.json())
             .then((user) => {
-                console.log(user.role, chef);
+                // console.log(user.role, chef);
                 if (user.role === "chef") setChef(true);
             })
             .finally(() => setDone(true));
