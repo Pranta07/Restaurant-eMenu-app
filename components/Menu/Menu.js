@@ -110,7 +110,7 @@ export default function Menu() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.resName}>Hungry Chef!</Text>
+            <Text style={styles.resName}>Cookaroo</Text>
             <Searchbar
                 style={styles.searchBar}
                 placeholder="Search"
@@ -138,11 +138,12 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     resName: {
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: "bold",
         marginTop: 25,
         marginBottom: 10,
         color: "blueviolet",
+        letterSpacing: 3,
     },
     item: {
         width: 350,
