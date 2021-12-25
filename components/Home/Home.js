@@ -24,14 +24,20 @@ export default function Home() {
             <View style={styles.home}>
                 <Image
                     source={{
-                        uri: "https://image.similarpng.com/very-thumbnail/2021/06/Chef-logo-template-isoated-on-transparent-background-PNG.png",
+                        uri: "https://i.ibb.co/dMCvHP4/Pngtree-cartoon-chef-583043.png",
                     }}
-                    style={{ width: 100, height: 80 }}
+                    style={{ width: "100%", height: 250 }}
                 />
                 <Text
-                    style={{ color: "white", fontSize: 40, fontWeight: "bold" }}
+                    style={{
+                        color: "#e3b3bb",
+                        fontSize: 44,
+                        fontWeight: "bold",
+                        fontStyle: "italic",
+                        letterSpacing: 3,
+                    }}
                 >
-                    Chef Club
+                    Cookaroo
                 </Text>
                 <TouchableOpacity>
                     <Button
@@ -55,6 +61,6 @@ export default function Home() {
 const styles = StyleSheet.create({
     home: {
         alignItems: "center",
-        top: 200,
+        top: 70,
     },
 });
