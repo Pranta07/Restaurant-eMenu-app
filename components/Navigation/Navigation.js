@@ -19,7 +19,7 @@ const Navigation = () => {
             )
                 .then((res) => res.json())
                 .then((user) => {
-                    console.log(user.role);
+                    // console.log(user.role);
                     if (user?.role === "admin" || user?.role === "chef")
                         setAdmin(true);
                 });
